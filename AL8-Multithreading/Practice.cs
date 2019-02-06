@@ -52,7 +52,20 @@ namespace Advanced_Lesson_6_Multithreading
         /// LA8.P2/X. Написать консольное приложение, которое “делает массовую рассылку”. 
         /// </summary>
         public static void LA8_P2_5()
-        {           
+        {
+            Random rand = new Random();
+            for (int i = 0; i < 50; i++)
+            {
+                string file = $@"d:\_hw8\{i}.txt";
+                /*File.AppendAllText(file, file);
+                Thread.Sleep(rand.Next(1000));*/
+
+                ThreadPool.QueueUserWorkItem((object obj) =>
+                {
+                    File.AppendAllText(file, file);
+                    Thread.Sleep(rand.Next(1000));
+                });
+            }
         }
 
         /// <summary>
@@ -67,8 +80,27 @@ namespace Advanced_Lesson_6_Multithreading
         /// LA8.P4/X. Отредактировать приложение по “рассылке” “писем”. 
         /// Сохранять все “тела” “писем” в один файл. Использовать блокировку потоков, чтобы избежать проблем синхронизации.  
         /// </summary>
+        /// 
         public static void LA8_P4_5()
-        {            
+        {
+            var obj = new object();
+            Random rand = new Random();
+            string file = $@"d:\_hw8\0.txt";
+
+            File.Delete(file);
+
+            for (int i = 0; i < 10; i++)
+            {
+                Thread t = new Thread(() =>
+                {
+                    lock (obj)
+                    {
+                        File.AppendAllText(file, $@"d:\_hw8\{i}.txt" + "\n");
+                    }
+                });
+
+                t.Start();
+            }
         }
 
         /// <summary>
