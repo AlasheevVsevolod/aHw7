@@ -15,7 +15,7 @@ namespace Advanced_Lesson_6_Multithreading
             //Lesson.MultiThreadingExample();
             //Lesson.ThreadPoolExample();
             //Lesson.UnsyncPlayersExample();
-            Lesson.LockPlayersExample();
+            //Lesson.LockPlayersExample();
             //Lesson.MutexPlayerExample();
             //Lesson.AsyncPlayerExample();
             //Lesson.AMPPlayerExample();
